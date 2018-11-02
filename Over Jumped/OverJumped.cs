@@ -147,56 +147,27 @@ namespace Over_Jumped
                 Player.Left -= Hspeed;
                 //Test.Text = "Move Right";
             }
+
+
             foreach (PictureBox box in boxs)
             {
-                if (Player.Bounds.IntersectsWith(box.Bounds))
+                if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left)
                 {
-                    if (Player.Left <= box.Right && Player.Right > box.Right)
-                    {
-                        Hleft = true;
-                        //Player.Top = box[0].Top - Player.Height + 1;
-                        Test.Text = "Left";
-                    }
-                    else if (Player.Right <= box.Left && Player.Left > box.Left)
-                    {
-                        Hright = true;
-                        //Player.Top = box[0].Bottom + 1;
-                        Test.Text = "Right";
-                    }
+                    Hleft = true;
                 }
                 else
                 {
                     Hleft = false;
-                    Hright = false;
-                    //Test.Text = "NOTBoxTOP";
                 }
-                if (Player.Right > box.Left
-                    && Player.Left < box.Right - Player.Width / 2
-                    && Player.Bottom > box.Top)
+                if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top)
                 {
-
+                    Hright = true;
+                }
+                else
+                {
+                    Hright = false;
                 }
             }
-
-            //foreach (PictureBox box in boxs)
-            //{
-            //    if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left)
-            //    {
-            //        Hleft = true;
-            //    }
-            //    else
-            //    {
-            //        Hleft = false;
-            //    }
-            //    if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top)
-            //    {
-            //        Hright = true;
-            //    }
-            //    else
-            //    {
-            //        Hright = false;
-            //    }
-            //}
         }
 
         private void Over_Jumped_KeyDown(object sender, KeyEventArgs e)

@@ -17,6 +17,7 @@ namespace Over_Jumped
         bool playerR = false;
         bool playerUp = false;
         bool playerGound = false;
+        bool esc = false;
         int JumpCounter = 0;
         bool Vbottom = false;
         bool Vtop = false;
@@ -60,7 +61,7 @@ namespace Over_Jumped
 
             if (!alreadyJump && playerUp && (JumpCounter < 20 || playerGound))
             {
-                if(!Vtop)
+                if (!Vtop)
                 {
                     Vspeed = -10;
                     JumpCounter++;
@@ -70,13 +71,13 @@ namespace Over_Jumped
                     JumpCounter += 20;
                     Vspeed = 10;
                 }
-                
+
                 if (JumpCounter >= 20)
                 {
                     alreadyJump = true;
                 }
             }
-            else if(Vbottom)
+            else if (Vbottom)
             {
                 Vspeed = 0;
                 JumpCounter = 0;
@@ -84,7 +85,7 @@ namespace Over_Jumped
                 {
                     alreadyJump = false;
                 }
-                
+
             }
             else if (playerGound)
             {
@@ -142,7 +143,7 @@ namespace Over_Jumped
                 //Test.Text = "Move left";
             }
 
-            if (playerR&& !Hleft)
+            if (playerR && !Hleft)
             {
                 Player.Left -= Hspeed;
                 //Test.Text = "Move Right";
@@ -212,8 +213,15 @@ namespace Over_Jumped
                 case Keys.Up:
                     playerUp = true;
                     break;
+                case Keys.Escape:
+                    menu menu = new menu();
+                    menu.Show();
+                    //Test.Text = "E";
+                    break;
+
             }
         }
+
 
         private void Over_Jumped_KeyUp(object sender, KeyEventArgs e)
         {

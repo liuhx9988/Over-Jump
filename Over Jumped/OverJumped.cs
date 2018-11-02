@@ -39,6 +39,8 @@ namespace Over_Jumped
         bool alreadyJump = false;
         private void Ver_Tick(object sender, EventArgs e)
         {
+            score++;
+            ScoreNum.Text = score.ToString();
             if (Player.Top >= this.Size.Height - Player.Height - 30)
             {
                 Vspeed = 0;
@@ -145,50 +147,56 @@ namespace Over_Jumped
                 Player.Left -= Hspeed;
                 //Test.Text = "Move Right";
             }
-
-            //if (Player.Bounds.IntersectsWith(box[0].Bounds))
-            //{
-            //    if (Player.Left <= box[0].Right && Player.Right > box[0].Right)
-            //    {
-            //        Hleft = true;
-            //        //Player.Top = box[0].Top - Player.Height + 1;
-            //        Test.Text = "Left";
-            //    }
-            //    else if (Player.Right <= box[0].Left && Player.Left > box[0].Left)
-            //    {
-            //        Hright = true;
-            //        //Player.Top = box[0].Bottom + 1;
-            //        Test.Text = "Right";
-            //    }
-            //}
-            //else
-            //{
-            //    Hleft = false;
-            //    Hright = false;
-            //    //Test.Text = "NOTBoxTOP";
-            //}
-            //if (Player.Right > box[0].Left
-            //    && Player.Left < box[0].Right - Player.Width / 2
-            //    && Player.Bottom > box[0].Top)
             foreach (PictureBox box in boxs)
             {
-                if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left)
+                if (Player.Bounds.IntersectsWith(box.Bounds))
                 {
-                    Hleft = true;
+                    if (Player.Left <= box.Right && Player.Right > box.Right)
+                    {
+                        Hleft = true;
+                        //Player.Top = box[0].Top - Player.Height + 1;
+                        Test.Text = "Left";
+                    }
+                    else if (Player.Right <= box.Left && Player.Left > box.Left)
+                    {
+                        Hright = true;
+                        //Player.Top = box[0].Bottom + 1;
+                        Test.Text = "Right";
+                    }
                 }
                 else
                 {
                     Hleft = false;
-                }
-                if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top)
-                {
-                    Hright = true;
-                }
-                else
-                {
                     Hright = false;
+                    //Test.Text = "NOTBoxTOP";
+                }
+                if (Player.Right > box.Left
+                    && Player.Left < box.Right - Player.Width / 2
+                    && Player.Bottom > box.Top)
+                {
+
                 }
             }
+
+            //foreach (PictureBox box in boxs)
+            //{
+            //    if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left)
+            //    {
+            //        Hleft = true;
+            //    }
+            //    else
+            //    {
+            //        Hleft = false;
+            //    }
+            //    if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top)
+            //    {
+            //        Hright = true;
+            //    }
+            //    else
+            //    {
+            //        Hright = false;
+            //    }
+            //}
         }
 
         private void Over_Jumped_KeyDown(object sender, KeyEventArgs e)

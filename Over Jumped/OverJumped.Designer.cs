@@ -36,6 +36,8 @@
             this.Box0 = new System.Windows.Forms.PictureBox();
             this.Player = new System.Windows.Forms.PictureBox();
             this.Box1 = new System.Windows.Forms.PictureBox();
+            this.ScoreText = new System.Windows.Forms.Label();
+            this.ScoreNum = new System.Windows.Forms.Label();
             Ver = new System.Windows.Forms.Timer(this.components);
             Hor = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Box0)).BeginInit();
@@ -94,11 +96,31 @@
             this.Box1.TabIndex = 3;
             this.Box1.TabStop = false;
             // 
+            // ScoreText
+            // 
+            this.ScoreText.AutoSize = true;
+            this.ScoreText.Location = new System.Drawing.Point(934, 36);
+            this.ScoreText.Name = "ScoreText";
+            this.ScoreText.Size = new System.Drawing.Size(49, 17);
+            this.ScoreText.TabIndex = 4;
+            this.ScoreText.Text = "Score:";
+            // 
+            // ScoreNum
+            // 
+            this.ScoreNum.AutoSize = true;
+            this.ScoreNum.Location = new System.Drawing.Point(989, 36);
+            this.ScoreNum.Name = "ScoreNum";
+            this.ScoreNum.Size = new System.Drawing.Size(16, 17);
+            this.ScoreNum.TabIndex = 5;
+            this.ScoreNum.Text = "0";
+            // 
             // Over_Jumped
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 941);
+            this.Controls.Add(this.ScoreNum);
+            this.Controls.Add(this.ScoreText);
             this.Controls.Add(this.Box1);
             this.Controls.Add(this.Box0);
             this.Controls.Add(this.Test);
@@ -121,6 +143,8 @@
         private System.Windows.Forms.Label Test;
         private System.Windows.Forms.PictureBox Box0;
         private System.Windows.Forms.PictureBox Box1;
+        private System.Windows.Forms.Label ScoreText;
+        private System.Windows.Forms.Label ScoreNum;
     }
 }
 

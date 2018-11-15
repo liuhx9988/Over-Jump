@@ -18,6 +18,7 @@ namespace Over_Jumped
         bool playerUp = false;
         bool playerGound = false;
         int JumpCounter = 0;
+        int grvaityCounter = 0;
         bool Vbottom = false;
         bool Vtop = false;
         bool Hleft = false;
@@ -47,10 +48,10 @@ namespace Over_Jumped
                 playerGound = true;
 
             }
-            //else if(playerGound)
-            //{
-            //    Vspeed = 0;
-            //}
+            else if (grvaityCounter<10)
+            {
+                grvaityCounter++;
+            }
             else
             {
                 Vspeed += 1;
@@ -108,21 +109,35 @@ namespace Over_Jumped
             }
             foreach (PictureBox box in boxs)
             {
-                if (Player.Bounds.IntersectsWith(box.Bounds))
+                if(Player.Left +Player.Width -1> box.Left 
+                    &&Player.Width +5 < box.Left + box.Width 
+                    &&Player.Top+Player.Height >+ box.Top 
+                    && Player.Top < box.Top
+                    && Player.Bounds.IntersectsWith(box.Bounds))
                 {
-                    if (Player.Bottom >= box.Top && Player.Bottom < box.Bottom)
-                    {
-                        Vbottom = true;
-                        Player.Top = box.Top - Player.Height + 1;
-                        //Test.Text = "BoxGround";
-                    }
-                    else if (Player.Top <= box.Bottom && Player.Bottom > box.Top)
-                    {
-                        Vtop = true;
-                        Player.Top = box.Bottom + 1;
-                        //Test.Text = "BoxTOP";
-                    }
+                    //Player.Top = box.Top - Player.Height +5;
+                    Vbottom = true;
+                    playerGound = true;
+
                 }
+                //if (Player.Bounds.IntersectsWith(box.Bounds))
+                //{
+                //    if (Player.Bottom >= box.Top && Player.Bottom < box.Bottom)
+                //    {
+                //        Vbottom = true;
+                //        Player.Top = box.Top - Player.Height - 1;
+                //        playerGound = true;
+                //        Vspeed = 0;
+                //        grvaityCounter =0;
+                //        //Test.Text = "BoxGround";
+                //    }
+                //    else if (Player.Top <= box.Bottom && Player.Bottom > box.Top)
+                //    {
+                //        Vtop = true;
+                //        Player.Top = box.Bottom + 1;
+                //        //Test.Text = "BoxTOP";
+                //    }
+                //}
                 else
                 {
                     Vbottom = false;
@@ -151,22 +166,34 @@ namespace Over_Jumped
 
             foreach (PictureBox box in boxs)
             {
-                if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left)
-                {
-                    Hleft = true;
+                //if (Player.Bounds.IntersectsWith(box.Bounds))
+                //{
+                    if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left
+                    )
+                    {
+                        Hleft = true;
+                        Test.Text = " left";
+                     }
+                    else
+                    {
+                        Hleft = false;
+                    }
+                    if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top
+                    &&Player.Top<box.Bottom)
+                    {
+                        Hright = true;
+                        Test.Text = "right";
                 }
-                else
-                {
-                    Hleft = false;
-                }
-                if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top)
-                {
-                    Hright = true;
-                }
-                else
-                {
-                    Hright = false;
-                }
+                    else
+                    {
+                        Hright = false;
+                    }
+                //}
+                //else
+                //{
+                //    Hleft = false;
+                //    Hright = false;
+                //}
             }
         }
 

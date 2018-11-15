@@ -59,6 +59,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="menu.resx">
+      <DependentUpon>menu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OverJumped.resx">
       <DependentUpon>OverJumped.cs</DependentUpon>
     </EmbeddedResource>

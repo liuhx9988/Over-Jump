@@ -79,9 +79,9 @@
             // 
             this.Player.BackColor = System.Drawing.Color.Transparent;
             this.Player.Image = ((System.Drawing.Image)(resources.GetObject("Player.Image")));
-            this.Player.Location = new System.Drawing.Point(462, 436);
+            this.Player.Location = new System.Drawing.Point(529, 584);
             this.Player.Name = "Player";
-            this.Player.Size = new System.Drawing.Size(142, 221);
+            this.Player.Size = new System.Drawing.Size(75, 73);
             this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Player.TabIndex = 0;
             this.Player.TabStop = false;

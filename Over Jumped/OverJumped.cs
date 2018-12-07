@@ -16,11 +16,11 @@ namespace Over_Jumped
         bool playerL = false;
         bool playerR = false;
         bool playerUp = false;
-        bool playerGound = false;
-        int JumpCounter = 0;
-        int grvaityCounter = 0;
-        bool Vbottom = false;
-        bool Vtop = false;
+        //bool playerGound = false;
+        //int JumpCounter = 0;
+        //int grvaityCounter = 0;
+        //bool Vbottom = false;
+        //bool Vtop = false;
         bool Hleft = false;
         bool Hright = false;
         int score = 0;
@@ -37,113 +37,99 @@ namespace Over_Jumped
             boxs[1] = Box1;
         }
         int Vspeed = 0;
-        bool alreadyJump = false;
+        //bool alreadyJump = false;
+        public Boolean collisionBottom(PictureBox tar)
+        {
+            foreach (PictureBox box in boxs)
+            {
+                if (box != null)
+                {
+                    PictureBox temp1 = new PictureBox();
+                    temp1.Bounds = box.Bounds;
+                    temp1.SetBounds(temp1.Location.X, temp1.Location.Y + temp1.Height, temp1.Width, 1);
+                    if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                        return true;
+                }
+            }
+            return false;
+        }
+        public Boolean collisionTop(PictureBox tar)
+        {
+
+            foreach (PictureBox box in boxs)
+            {
+                if (box != null)
+                {
+                    PictureBox temp1 = new PictureBox();
+                    temp1.Bounds = box.Bounds;
+                    temp1.SetBounds(temp1.Location.X - 3, temp1.Location.Y - 1, temp1.Width + 6, 1);
+                    if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public Boolean collisionLeft(PictureBox tar)
+        {
+            foreach (PictureBox box in boxs)
+            {
+                if (box != null)
+                {
+                    PictureBox temp1 = new PictureBox();
+                    temp1.Bounds = box.Bounds;
+                    temp1.SetBounds(temp1.Location.X - 1, temp1.Location.Y + 1, 1, temp1.Height - 1);
+                    if (tar.Bounds.IntersectsWith(temp1.Bounds))
+                        return true;
+                }
+            }
+            return false;
+        }
+        public Boolean collisionRight(PictureBox tar)
+        {
+            foreach (PictureBox box in boxs)
+            {
+                if (box != null)
+                {
+                    PictureBox temp2 = new PictureBox();
+                    temp2.Bounds = box.Bounds;
+                    temp2.SetBounds(temp2.Location.X + temp2.Width, temp2.Location.Y + 1, 1, temp2.Height - 1);
+                    if (tar.Bounds.IntersectsWith(temp2.Bounds))
+                        return true;
+                }
+            }
+            return false;
+        }
         private void Ver_Tick(object sender, EventArgs e)
         {
             score++;
             ScoreNum.Text = score.ToString();
-            if (Player.Top >= this.Size.Height - Player.Height - 30)
-            {
-                Vspeed = 0;
-                playerGound = true;
-
-            }
-            else if (grvaityCounter<10)
-            {
-                grvaityCounter++;
-            }
-            else
-            {
-                Vspeed += 1;
-                playerGound = false;
-            }
-
-
-            if (!alreadyJump && playerUp && (JumpCounter < 20 || playerGound))
-            {
-                if(!Vtop)
-                {
-                    Vspeed = -10;
-                    JumpCounter++;
+            //Vspeed++;
+            if (Vspeed > 0)
+            {   //If any force still exists
+                if (collisionBottom(Player))
+                {   //Unless players head is banging in a wall
+                    Vspeed = 0;
                 }
                 else
-                {
-                    JumpCounter += 20;
-                    Vspeed = 10;
+                {   //Move player up, lower force each "move"
+                    Vspeed--;
+                    Player.Top -= Vspeed;
                 }
-                
-                if (JumpCounter >= 20)
-                {
-                    alreadyJump = true;
-                }
-            }
-            else if(Vbottom)
-            {
-                Vspeed = 0;
-                JumpCounter = 0;
-                if (!playerUp)
-                {
-                    alreadyJump = false;
-                }
-                
-            }
-            else if (playerGound)
-            {
-                JumpCounter = 0;
-                if (!playerUp)
-                {
-                    alreadyJump = false;
-                }
-            } else if (!playerUp)
-            {
-                JumpCounter += 5;
-            }
-
-            if (Player.Top + Vspeed > this.Size.Height - Player.Height - 30)
-            {
-                Player.Top = this.Size.Height - Player.Height - 30;
             }
             else
-            {
-                Player.Top += Vspeed;
+            {   //If no force, player is not jumping.
+                playerUp = false;
             }
-            foreach (PictureBox box in boxs)
-            {
-                if(Player.Left +Player.Width -1> box.Left 
-                    &&Player.Width +5 < box.Left + box.Width 
-                    &&Player.Top+Player.Height >+ box.Top 
-                    && Player.Top < box.Top
-                    && Player.Bounds.IntersectsWith(box.Bounds))
-                {
-                    //Player.Top = box.Top - Player.Height +5;
-                    Vbottom = true;
-                    playerGound = true;
 
-                }
-                //if (Player.Bounds.IntersectsWith(box.Bounds))
-                //{
-                //    if (Player.Bottom >= box.Top && Player.Bottom < box.Bottom)
-                //    {
-                //        Vbottom = true;
-                //        Player.Top = box.Top - Player.Height - 1;
-                //        playerGound = true;
-                //        Vspeed = 0;
-                //        grvaityCounter =0;
-                //        //Test.Text = "BoxGround";
-                //    }
-                //    else if (Player.Top <= box.Bottom && Player.Bottom > box.Top)
-                //    {
-                //        Vtop = true;
-                //        Player.Top = box.Bottom + 1;
-                //        //Test.Text = "BoxTOP";
-                //    }
-                //}
-                else
-                {
-                    Vbottom = false;
-                    Vtop = false;
-                    //Test.Text = "NOTBoxTOP";
-                }
+            if (!playerUp && Player.Location.Y + Player.Height < this.Height - 2 && !collisionTop(Player))
+            {   //If Player doesnt jump, Location is above the floor or is standing on object
+                Player.Top += 10; //Player falls
+            }
+
+            if (!playerUp && Player.Location.Y + Player.Height > this.Height - 1)
+            {   //If player would for some reason be under the floor, move him up
+                Player.Top--;
             }
         }
 
@@ -168,8 +154,7 @@ namespace Over_Jumped
             {
                 //if (Player.Bounds.IntersectsWith(box.Bounds))
                 //{
-                    if (Player.Left + Player.Width >= box.Left && Player.Top > box.Top && Player.Left < box.Left
-                    )
+                    if (collisionLeft(Player))
                     {
                         Hleft = true;
                         Test.Text = " left";
@@ -178,8 +163,7 @@ namespace Over_Jumped
                     {
                         Hleft = false;
                     }
-                    if (Player.Right - Player.Width <= box.Right && Player.Right > box.Right && Player.Top > box.Top
-                    &&Player.Top<box.Bottom)
+                    if (collisionRight(Player))
                     {
                         Hright = true;
                         Test.Text = "right";
@@ -208,7 +192,16 @@ namespace Over_Jumped
                     playerR = true;
                     break;
                 case Keys.Up:
-                    playerUp = true;
+                    //playerUp = true;
+
+
+                        if (!playerUp /*&& !InAirNoCollision(pb_Player)*/)
+                        {  
+                            Player.Top -= 20;     
+                            Vspeed = 20;       
+                        playerUp = true;    
+                        }
+                    
                     break;
             }
         }

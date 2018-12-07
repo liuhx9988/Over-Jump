@@ -68,7 +68,7 @@
             // Box0
             // 
             this.Box0.Image = global::Over_Jumped.Properties.Resources.White_full;
-            this.Box0.Location = new System.Drawing.Point(670, 668);
+
             this.Box0.Name = "Box0";
             this.Box0.Size = new System.Drawing.Size(351, 97);
             this.Box0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -89,7 +89,6 @@
             // Box1
             // 
             this.Box1.Image = global::Over_Jumped.Properties.Resources.White_full;
-            this.Box1.Location = new System.Drawing.Point(12, 488);
             this.Box1.Name = "Box1";
             this.Box1.Size = new System.Drawing.Size(351, 97);
             this.Box1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

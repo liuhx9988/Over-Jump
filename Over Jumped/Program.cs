@@ -16,7 +16,7 @@ namespace Over_Jumped
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Over_Jumped());
+            Application.Run(new menu());
         }
     }
 }

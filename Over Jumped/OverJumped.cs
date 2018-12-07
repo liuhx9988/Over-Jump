@@ -13,6 +13,7 @@ namespace Over_Jumped
 {
     public partial class Over_Jumped : Form
     {
+
         bool playerL = false;
         bool playerR = false;
         bool playerUp = false;
@@ -24,23 +25,27 @@ namespace Over_Jumped
         bool Hleft = false;
         bool Hright = false;
         int score = 0;
+        
         PictureBox[] boxs = new PictureBox[2];
 
         public Over_Jumped()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             boxs[0] = Box0;
             boxs[1] = Box1;
+
         }
         int Vspeed = 0;
         //bool alreadyJump = false;
         public Boolean collisionBottom(PictureBox tar)
         {
-            foreach (PictureBox box in boxs)
+        foreach (PictureBox box in boxs)
             {
                 if (box != null)
                 {
@@ -116,6 +121,102 @@ namespace Over_Jumped
                     Vspeed--;
                     Player.Top -= Vspeed;
                 }
+
+            if (!menu.pause)
+            {
+                score++;
+                ScoreNum.Text = score.ToString();
+                if (Player.Top >= this.Size.Height - Player.Height - 30)
+                {
+                    Vspeed = 0;
+                    playerGound = true;
+
+                }
+                //else if(playerGound)
+                //{
+                //    Vspeed = 0;
+                //}
+                else
+                {
+                    Vspeed += 1;
+                    playerGound = false;
+                }
+
+
+                if (!alreadyJump && playerUp && (JumpCounter < 20 || playerGound))
+                {
+                    if (!Vtop)
+                    {
+                        Vspeed = -10;
+                        JumpCounter++;
+                    }
+                    else
+                    {
+                        JumpCounter += 20;
+                        Vspeed = 10;
+                    }
+
+                    if (JumpCounter >= 20)
+                    {
+                        alreadyJump = true;
+                    }
+                }
+                else if (Vbottom)
+                {
+                    Vspeed = 0;
+                    JumpCounter = 0;
+                    if (!playerUp)
+                    {
+                        alreadyJump = false;
+                    }
+
+                }
+                else if (playerGound)
+                {
+                    JumpCounter = 0;
+                    if (!playerUp)
+                    {
+                        alreadyJump = false;
+                    }
+                }
+                else if (!playerUp)
+                {
+                    JumpCounter += 5;
+                }
+
+                if (Player.Top + Vspeed > this.Size.Height - Player.Height - 30)
+                {
+                    Player.Top = this.Size.Height - Player.Height - 30;
+                }
+                else
+                {
+                    Player.Top += Vspeed;
+                }
+                foreach (PictureBox box in boxs)
+                {
+                    if (Player.Bounds.IntersectsWith(box.Bounds))
+                    {
+                        if (Player.Bottom >= box.Top && Player.Bottom < box.Bottom)
+                        {
+                            Vbottom = true;
+                            Player.Top = box.Top - Player.Height + 1;
+                            //Test.Text = "BoxGround";
+                        }
+                        else if (Player.Top <= box.Bottom && Player.Bottom > box.Top)
+                        {
+                            Vtop = true;
+                            Player.Top = box.Bottom + 1;
+                            //Test.Text = "BoxTOP";
+                        }
+                    }
+                    else
+                    {
+                        Vbottom = false;
+                        Vtop = false;
+                        //Test.Text = "NOTBoxTOP";
+                    }
+                }
+
             }
             else
             {   //If no force, player is not jumping.
@@ -136,12 +237,15 @@ namespace Over_Jumped
 
         private void Hor_Tick(object sender, EventArgs e)
         {
-            const int Hspeed = -5;
-            if (playerL && !Hright)
+            if (!menu.pause)
             {
-                Player.Left += Hspeed;
-                //Test.Text = "Move left";
-            }
+                const int Hspeed = -5;
+                if (playerL && !Hright)
+                {
+                    Player.Left += Hspeed;
+                    //Test.Text = "Move left";
+                }
+
 
             if (playerR&& !Hleft)
             {
@@ -177,6 +281,7 @@ namespace Over_Jumped
                 //{
                 //    Hleft = false;
                 //    Hright = false;
+
                 //}
             }
         }
@@ -203,8 +308,26 @@ namespace Over_Jumped
                         }
                     
                     break;
+                case Keys.Escape:
+                    if (Application.OpenForms.OfType<menu>().Count() > 1)
+                    {
+                        Application.OpenForms.OfType<menu>().Last().Show();
+                        menu.pause = true;
+                    }
+                    else
+                    {
+                        menu menu = new menu();
+                        menu.Show();
+                        menu.pause = true;
+                    }
+                    
+                    //Test.Text = "E";
+                    break;
+
             }
         }
+
+
 
         private void Over_Jumped_KeyUp(object sender, KeyEventArgs e)
         {

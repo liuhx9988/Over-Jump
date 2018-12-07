@@ -68,7 +68,7 @@
             // Box0
             // 
             this.Box0.Image = global::Over_Jumped.Properties.Resources.White_full;
-            this.Box0.Location = new System.Drawing.Point(808, 661);
+
             this.Box0.Name = "Box0";
             this.Box0.Size = new System.Drawing.Size(351, 97);
             this.Box0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -79,9 +79,9 @@
             // 
             this.Player.BackColor = System.Drawing.Color.Transparent;
             this.Player.Image = ((System.Drawing.Image)(resources.GetObject("Player.Image")));
-            this.Player.Location = new System.Drawing.Point(581, 434);
+            this.Player.Location = new System.Drawing.Point(529, 584);
             this.Player.Name = "Player";
-            this.Player.Size = new System.Drawing.Size(142, 221);
+            this.Player.Size = new System.Drawing.Size(75, 73);
             this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Player.TabIndex = 0;
             this.Player.TabStop = false;
@@ -89,7 +89,6 @@
             // Box1
             // 
             this.Box1.Image = global::Over_Jumped.Properties.Resources.White_full;
-            this.Box1.Location = new System.Drawing.Point(36, 592);
             this.Box1.Name = "Box1";
             this.Box1.Size = new System.Drawing.Size(351, 97);
             this.Box1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -118,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 941);
+            this.ClientSize = new System.Drawing.Size(1281, 941);
             this.Controls.Add(this.ScoreNum);
             this.Controls.Add(this.ScoreText);
             this.Controls.Add(this.Box1);
